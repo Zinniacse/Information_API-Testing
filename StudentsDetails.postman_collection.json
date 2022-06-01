@@ -160,6 +160,73 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Specific Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var jsonData = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"pm.test(\"first_name\", function () {\r",
+							"   \r",
+							"    pm.expect(jsonData.data.first_name).to.eql(\"sample string 2\");\r",
+							"});\r",
+							"});\r",
+							"pm.test(\"middle_name\", function () {\r",
+							"\r",
+							"    pm.expect(jsonData.data.middle_name).to.eql(\"sample string 3\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"last_name\", function () {\r",
+							"\r",
+							"    pm.expect(jsonData.data.last_name).to.eql(\"sample string 4\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"date_of_birth\", function () {\r",
+							"\r",
+							"    pm.expect(jsonData.data.date_of_birth).to.eql(\"sample string 5\");\r",
+							"});\r",
+							"pm.environment.set(\"id\",jsonData.id)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/studentsDetails/{{id}}",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
