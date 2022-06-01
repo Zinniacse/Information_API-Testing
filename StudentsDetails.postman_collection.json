@@ -227,6 +227,56 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Create Student Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"true\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Add data success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Permanent_Address\": {\r\n\"House_Number\": \"sample string 1\",\r\n\"City\": \"sample string 2\",\r\n\"State\": \"sample string 3\",\r\n\"Country\": \"sample string 4\",\r\n\"PhoneNumber\": [\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n},\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n}\r\n]\r\n},\r\n\"stId\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/addresses",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
