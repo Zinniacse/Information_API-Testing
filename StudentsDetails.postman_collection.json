@@ -75,7 +75,12 @@
 							"pm.test(\"date_of_birth\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.date_of_birth).to.eql(\"sample string 5\");\r",
-							"});"
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"id\",jsonData.id)\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -101,6 +106,56 @@
 					"path": [
 						"api",
 						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"true\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"update data success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\":{{id}},\r\n\"first_name\": \"sample \",\r\n\"middle_name\": \"sample \",\r\n\"last_name\": \"sample \",\r\n\"date_of_birth\": \"sample \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/studentsDetails/{{id}}",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{id}}"
 					]
 				}
 			},
