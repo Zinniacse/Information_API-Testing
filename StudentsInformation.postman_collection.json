@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "b5b612bb-41c0-48f5-8c3d-eb662ac5104d",
-		"name": "StudentsDetails",
+		"_postman_id": "55d3d4ca-169b-4a21-8e13-7bc076a97d37",
+		"name": "StudentsInformation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Student",
+			"name": "getinformation",
 			"event": [
 				{
 					"listen": "test",
@@ -36,9 +36,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/studentsDetails",
+					"raw": "{{baseUrl}}/api/studentsDetails",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -49,24 +49,26 @@
 			"response": []
 		},
 		{
-			"name": "Create Student",
+			"name": "createinformation",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"var jsonData = pm.response.json()\r",
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"id\", jsonData.id)\r",
 							"pm.test(\"first_name\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.first_name).to.eql(\"sample string 2\");\r",
 							"});\r",
-							"});\r",
+							"\r",
 							"pm.test(\"middle_name\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.middle_name).to.eql(\"sample string 3\");\r",
 							"});\r",
-							"\r",
 							"pm.test(\"last_name\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.last_name).to.eql(\"sample string 4\");\r",
@@ -74,13 +76,8 @@
 							"\r",
 							"pm.test(\"date_of_birth\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.date_of_birth).to.eql(\"sample string 5\");\r",
-							"});\r",
-							"\r",
-							"\r",
-							"var jsonData = pm.response.json()\r",
-							"pm.environment.set(\"id\",jsonData.id)\r",
-							""
+							"    pm.expect(jsonData.date_of_birth).to.eql( \"sample string 5\");\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -99,9 +96,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/studentsDetails",
+					"raw": "{{baseUrl}}/api/studentsDetails",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -112,7 +109,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Student",
+			"name": "updateinformation",
 			"event": [
 				{
 					"listen": "test",
@@ -121,14 +118,12 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"\r",
-							"var jsonData = pm.response.json()\r",
 							"pm.test(\"true\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"update data success\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"update  data success\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -148,9 +143,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/studentsDetails/{{id}}",
+					"raw": "{{baseUrl}}/api/studentsDetails/{{id}}",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -162,7 +157,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Specific Student",
+			"name": "specificinformation",
 			"event": [
 				{
 					"listen": "test",
@@ -199,25 +194,13 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{Base_Url}}/api/studentsDetails/{{id}}",
+					"raw": "{{baseUrl}}/api/studentsDetails/{{id}}",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -229,7 +212,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Student Address",
+			"name": "createaddress",
 			"event": [
 				{
 					"listen": "test",
@@ -246,8 +229,7 @@
 							"\r",
 							"pm.test(\"Add data success\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							""
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -258,7 +240,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"Permanent_Address\": {\r\n\"House_Number\": \"sample string 1\",\r\n\"City\": \"sample string 2\",\r\n\"State\": \"sample string 3\",\r\n\"Country\": \"sample string 4\",\r\n\"PhoneNumber\": [\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n},\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n}\r\n]\r\n},\r\n\"stId\":2664751\r\n}",
+					"raw": "{\r\n\"Permanent_Address\": {\r\n\"House_Number\": \"sample string 1\",\r\n\"City\": \"sample string 2\",\r\n\"State\": \"sample string 3\",\r\n\"Country\": \"sample string 4\",\r\n\"PhoneNumber\": [\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n},\r\n{\r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n\"Mobile\": \"sample string 3\"\r\n}\r\n]\r\n},\r\n\"stId\": {{id}}\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -266,9 +248,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/addresses",
+					"raw": "{{baseUrl}}/api/addresses",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -279,7 +261,7 @@
 			"response": []
 		},
 		{
-			"name": "FINAL STUDENT DETAILS",
+			"name": "finaldetails",
 			"event": [
 				{
 					"listen": "test",
@@ -324,9 +306,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/FinalStudentDetails/{{id}}",
+					"raw": "{{baseUrl}}/api/FinalStudentDetails/{{id}}",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
@@ -338,7 +320,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Student",
+			"name": "deletestudent",
 			"event": [
 				{
 					"listen": "test",
@@ -366,12 +348,17 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/studentsDetails/{{id}}",
+					"raw": "{{baseUrl}}/api/studentsDetails/{{id}}",
 					"host": [
-						"{{Base_Url}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
